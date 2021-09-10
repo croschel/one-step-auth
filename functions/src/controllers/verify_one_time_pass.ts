@@ -31,11 +31,15 @@ const verifyOneTimePass = async (
         res.status(422).send({ error: "Code is not equal" });
       } else {
         try {
-          const userUpdated = await userRef.update({ codeValid: false });
-          res.json({ userUpdated });
+          await userRef.update({ codeValid: false });
+          const token = await admin.auth().createCustomToken(phone);
+          res.json({ token });
         } catch (err) {
           res.status(422).send({
-            error: { title: "User was not updated", description: err },
+            error: {
+              title: "Your token could not be generated",
+              description: err,
+            },
           });
         }
       }
