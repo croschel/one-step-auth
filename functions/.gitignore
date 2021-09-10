@@ -10,3 +10,4 @@ node_modules/
 
 # services from google
 service_account.json
+constants.ts
