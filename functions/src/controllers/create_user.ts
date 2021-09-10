@@ -6,9 +6,8 @@ const createUser = (req: functions.https.Request, res: functions.Response) => {
   if (!req.body.phone) {
     res.status(422).send({ error: "Bad input" });
   }
-
   // Format the phone number to remove dashes and parenthesis
-  const phone = String(req.body.phone).replace(/[ˆ\d]/g, "");
+  const phone = String(req.body.phone).replace(/[^\d]/g, "");
 
   // Create a new user account using that phone number
   admin
