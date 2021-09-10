@@ -3,6 +3,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import createUserController from "./controllers/create_user";
 import requestOneTimePassController from "./controllers/request_one_time_pass";
+import verifyOneTimePassController from "./controllers/verify_one_time_pass";
 import * as serviceAccount from "../service_account.json";
 
 dotenv.config();
@@ -21,6 +22,10 @@ export const createUser = functions.https.onRequest((request, response) =>
   createUserController(request, response)
 );
 
-export const request_one_time_pass = functions.https.onRequest(
+export const requestOneTimePass = functions.https.onRequest(
   (request, response) => requestOneTimePassController(request, response)
+);
+
+export const verifyOneTimePass = functions.https.onRequest(
+  (request, response) => verifyOneTimePassController(request, response)
 );
